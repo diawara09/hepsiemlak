@@ -134,7 +134,12 @@ router.delete("/:id", async (req, res) => {
   
   try {
     await Listing.findByIdAndDelete(id)
-    toBeDeleted.images.forEach(item => {fs.unlinkSync(destination + item)})
+    try {
+      toBeDeleted.images.forEach(item => {fs.unlinkSync(destination + item)})
+    } catch (error) {
+      
+    }
+    
     return res.send({msg: "Deleted with success!"})
   } catch (error) {
     return res.send({error: error.message})

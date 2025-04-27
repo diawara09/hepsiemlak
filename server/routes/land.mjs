@@ -84,9 +84,14 @@ router.put("/:id",  passport.authenticate('jwt',{session:false}),checkUser, uplo
     try {
         await Land.findByIdAndUpdate(id, data)
          if (toBeUpdated.images) {
-           toBeUpdated.images.forEach((item) =>
-             fs.unlinkSync(destination + item)
-           )
+          try {
+            toBeUpdated.images.forEach((item) =>
+              fs.unlinkSync(destination + item)
+            )
+          } catch (error) {
+            
+          }
+         
          }
         return res.send({msg: 'Terrain mis a jour!'})
         
@@ -140,9 +145,14 @@ router.delete("/:id", async (req, res) => {
     try {
         await Land.findByIdAndDelete(id)
         if (toBeDeleted.images) {
-          toBeDeleted.images.forEach((item) =>
-            fs.unlinkSync(destination + item)
-          )
+          try {
+            toBeDeleted.images.forEach((item) =>
+              fs.unlinkSync(destination + item)
+            )
+          } catch (error) {
+            
+          }
+         
         }
         return res.send({msg: 'Terrain supprimé'})
         

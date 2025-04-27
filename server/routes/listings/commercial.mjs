@@ -124,9 +124,14 @@ router.put(
 
     try {
       await Commercial.findByIdAndUpdate(id, data)
-      commercial.images.forEach((item) => {
-        fs.unlinkSync(destination + item)
-      })
+      try {
+        commercial.images.forEach((item) => {
+          fs.unlinkSync(destination + item)
+        })
+      } catch (error) {
+        
+      }
+     
       return res.send({ msg: 'Commercial updated!' })
     } catch (error) {
       return res.send({ error: error.message })

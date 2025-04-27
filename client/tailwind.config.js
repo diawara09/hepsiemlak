@@ -1,12 +1,24 @@
 
 import daisyui from 'daisyui'
+
+import tailwindcssIntersect from "tailwindcss-intersect"
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {},
   },
-  plugins: [daisyui],
+  variants: {
+    extend: {
+      backgroundColor: ['motion-safe', 'motion-reduce'],
+      textColor: ['motion-safe', 'motion-reduce'],
+      opacity: ['motion-safe', 'motion-reduce'],
+      transform: ['motion-safe', 'motion-reduce'],
+      animation: ['motion-safe', 'motion-reduce'],
+      transitionProperty: ['motion-safe', 'motion-reduce'],
+    },
+  },
+  plugins: [daisyui,tailwindcssIntersect],
   daisyui: {
     themes: [
       {

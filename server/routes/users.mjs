@@ -49,7 +49,12 @@ router.put('/:id', upload.single('picture'), async (req, res) => {
   if (!toBeUpdated) return res.send({ error: 'No user found!' })
 
  // if (Boolean(toBeUpdated.picture))
-    //fs.unlinkSync(destination + toBeUpdated.picture)
+ try {
+  fs.unlinkSync(destination + toBeUpdated.picture)
+ } catch (error) {
+  
+ }
+ 
 
   try {
     const newUser = { fullName, email, phone, picture: req.file.filename, description, userType }
@@ -71,7 +76,12 @@ router.patch("/verifySubmit/:id", passport.authenticate('jwt',{session:false}),c
  try {
    if (toBeUpdated.documents && toBeUpdated.documents.length > 0)
      //delete prev documents
-     toBeUpdated.documents.forEach((item) => fs.unlinkSync(destination + item))
+    try {
+      toBeUpdated.documents.forEach((item) => fs.unlinkSync(destination + item))
+    } catch (error) {
+      
+    }
+     
  } catch (error) {
   
  }

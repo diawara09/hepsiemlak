@@ -4,6 +4,7 @@ import { userContext } from "../utils/contexts"
 import Navbar from "../components/navbar"
 import { Outlet, useLoaderData } from "react-router-dom"
 import { url } from '../utils/serverUrl'
+import ObserverProvider from "../components/ObserverProvider"
 //import { useCookies } from 'react-cookie'
 export async function loader() {
     try {
@@ -33,9 +34,12 @@ export default function Root() {
     const user = useLoaderData()
     
     //alert("user: "+ user)
-    return (<userContext.Provider value={user}>
+    return (
+        <ObserverProvider>
+    <userContext.Provider value={user}>
         <Navbar user={user} />
         <Outlet />
         <Footer/>
-    </userContext.Provider>)
+    </userContext.Provider>
+    </ObserverProvider>)
 }

@@ -128,9 +128,14 @@ router.put('/:id',  passport.authenticate('jwt',{session:false}),checkUser, (req
 
   try {
     await Residence.findByIdAndUpdate(id, data)
-    residence.images.forEach((item) => {
-      fs.unlinkSync(destination + item)
-    })
+    try {
+      residence.images.forEach((item) => {
+        fs.unlinkSync(destination + item)
+      })
+    } catch (error) {
+      
+    }
+    
     return res.send({ msg: 'Residence updated!' })
   } catch (error) {
     return res.send({ error: error.message })
