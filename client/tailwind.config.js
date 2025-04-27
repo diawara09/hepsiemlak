@@ -1,6 +1,6 @@
 
 import daisyui from 'daisyui'
-
+import tailwindcssMotion from "tailwindcss-motion"; 
 import tailwindcssIntersect from "tailwindcss-intersect"
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -18,7 +18,7 @@ export default {
       transitionProperty: ['motion-safe', 'motion-reduce'],
     },
   },
-  plugins: [daisyui,tailwindcssIntersect],
+  plugins: [daisyui,tailwindcssMotion,tailwindcssIntersect],
   daisyui: {
     themes: [
       {
