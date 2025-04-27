@@ -55,7 +55,7 @@ export default function Home() {
                       setCountry('Niger')
                     }}
                   >
-                    <img className="w-14 lg:w-28 intersect:motion-preset-slide-up motion-delay-100" src="./niger.png" />
+                    <img className="w-14 lg:w-28 intersect:motion-preset-slide-up motion-delay-[1s]" src="./niger.png" />
                     Niger
                   </a>
                 </li>
@@ -70,12 +70,12 @@ export default function Home() {
                       setCountry('Burkina Faso')
                     }}
                   >
-                    <img className="w-14 lg:w-28 intersect:motion-preset-slide-up motion-delay-200" src="./burkina.png" />
+                    <img className="w-14 lg:w-28 intersect:motion-preset-slide-up motion-delay-[2s]" src="./burkina.png" />
                     Burkina Faso
                   </a>
                 </li>
               </ul>
-              <Form className="my-5 intersect:motion-preset-slide-up motion-delay-300" action={`/listings/list/homeSearch`}>
+              <Form className="my-5 intersect:motion-preset-slide-up motion-delay-[3s]" action={`/listings/list/homeSearch`}>
                 <div className="join join-vertical rounded-none  lg:join-horizontal">
                   <div>
                     <div>
@@ -146,7 +146,7 @@ export default function Home() {
               },
             }}
             navigation
-            className="w-full text-center intersect:motion-preset-slide-up motion-delay-500"
+            className="w-full text-center intersect:motion-preset-slide-up motion-delay-[5s]"
           >
             <SwiperSlide>
               <Link

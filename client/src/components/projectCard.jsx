@@ -15,7 +15,7 @@ export default function ProjectCard({ listing, user }) {
   const project = listing
   //console.log(listing);
   return (
-    <div className="card max-w-96 bg-base-100 shadow-xl m-5">
+    <div className="card max-w-96 bg-base-100 shadow-xl m-5 intersect:motion-preset-slide-up motion-delay-[2s]">
       <figure>
         {' '}
         <Link to={`/project/single/${project._id}`}>

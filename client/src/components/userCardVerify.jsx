@@ -17,7 +17,7 @@ export default function UserCardVerify({ listing }) {
     const user = listing
     return (
       <>
-        <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+        <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl intersect:motion-preset-slide-up motion-delay-[1s]">
           <div className="avatar">
             <div className="w-24 rounded-full mx-auto my-3">
               <img

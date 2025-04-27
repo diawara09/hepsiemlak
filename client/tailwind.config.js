@@ -8,16 +8,7 @@ export default {
   theme: {
     extend: {},
   },
-  variants: {
-    extend: {
-      backgroundColor: ['motion-safe', 'motion-reduce'],
-      textColor: ['motion-safe', 'motion-reduce'],
-      opacity: ['motion-safe', 'motion-reduce'],
-      transform: ['motion-safe', 'motion-reduce'],
-      animation: ['motion-safe', 'motion-reduce'],
-      transitionProperty: ['motion-safe', 'motion-reduce'],
-    },
-  },
+ 
   plugins: [daisyui,tailwindcssMotion,tailwindcssIntersect],
   daisyui: {
     themes: [

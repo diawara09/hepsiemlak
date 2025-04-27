@@ -15,7 +15,7 @@ export default function LandCard({ listing, user }) {
     const land =listing
   //console.log(listing);
   return (
-    <div className="card max-w-96 bg-base-100 shadow-xl m-5">
+    <div className="card max-w-96 bg-base-100 shadow-xl m-5 intersect:motion-preset-slide-up motion-delay-[1s]">
       <figure>
         {' '}
         <Link to={`/land/single/${land._id}`}>

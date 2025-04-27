@@ -32,8 +32,8 @@ export default function ResidenceDetails({listing}) {
     const detailsTitles = Object.keys(finalForm)
     return (
       <div className="p-5 lg:p-10">
-        <h1 className="text-2xl font-extrabold m-5"> {listing.title} </h1>
-        <div className="flex flex-col lg:flex-row items-center lg:items-start">
+        <h1 className="text-2xl font-extrabold m-5 intersect:motion-preset-slide-up motion-delay-[1s]"> {listing.title} </h1>
+        <div className="flex flex-col lg:flex-row items-center lg:items-start intersect:motion-preset-slide-up motion-delay-[3s]">
           <div className="flex flex-col lg:flex-row lg:p-5">
             <div>
               <Gallery images={images} />
@@ -78,7 +78,7 @@ export default function ResidenceDetails({listing}) {
 
 function OwnerCard({ owner }) {
     return (
-      <div className="card bg-base-100 w-96 shadow-xl">
+      <div className="card bg-base-100 w-96 shadow-xl intersect:motion-preset-slide-up motion-delay-[3s]">
         <figure className="px-10 pt-10">
           <div className="avatar">
             <div className="w-24 rounded-full">
