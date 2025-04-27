@@ -137,7 +137,6 @@ router.put('/:id',  passport.authenticate('jwt',{session:false}),checkUser, (req
   }
 })
 
-
 router.use(express.json())
 
 router.patch("/:id",  passport.authenticate('jwt',{session:false}),checkUser, async (req, res) => {
