@@ -165,20 +165,7 @@ export default function Navbar({ user }) {
                     Terrain
                   </NavLink>
                 </li>
-                <li>
-                  <NavLink
-                    className={({ isActive, isPending }) =>
-                      isActive
-                        ? ' bg-primary text-base-100'
-                        : isPending
-                        ? ' bg-secondary'
-                        : ''
-                    }
-                    to="/notaire?userType=Notaire"
-                  >
-                    Notaire
-                  </NavLink>
-                </li>
+               
                 <li>
                   <NavLink
                     className={({ isActive, isPending }) =>
@@ -294,20 +281,7 @@ export default function Navbar({ user }) {
                   Terrain
                 </NavLink>
               </li>
-              <li>
-                <NavLink
-                  className={({ isActive, isPending }) =>
-                    isActive
-                      ? ' bg-primary text-base-100'
-                      : isPending
-                      ? ' bg-secondary'
-                      : ''
-                  }
-                  to="/notaire?userType=Notaire"
-                >
-                  Notaire
-                </NavLink>
-              </li>
+             
               <li>
                 <NavLink
                   className={({ isActive, isPending }) =>
