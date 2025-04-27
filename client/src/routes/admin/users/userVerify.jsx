@@ -57,7 +57,6 @@ export default function UserVerify() {
         >
           <option value="Banque">Banque</option>
           <option value="Agence Immobiliere">Agence Immobiliere</option>
-          <option value="Notaire">Notaire</option>
           <option value="Architecte">Architecte</option>
         </select>
       </div>

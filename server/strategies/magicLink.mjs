@@ -1,12 +1,23 @@
 import passport from 'passport'
 import MagicLink from 'passport-magic-link'
-import sendgrid from '@sendgrid/mail'
+
 import Users from '../models/users.mjs'
 import {} from 'dotenv/config'
 
 const MagicLinkStrategy = MagicLink.Strategy
 
-sendgrid.setApiKey(process.env.SENDGRID_API_KEY)
+// set the email parameters up
+let defaultClient = brevo.ApiClient.instance
+
+let apiKey = defaultClient.authentications['api-key']
+
+let apiInstance = new brevo.TransactionalEmailsApi()
+
+apiKey.apiKey = process.env.BREVO_API_KEY
+
+let sendSmtpEmail = new brevo.SendSmtpEmail()
+
+
 
 passport.use(
   new MagicLinkStrategy(
@@ -21,19 +32,35 @@ passport.use(
       var link = user.isNative === "true"
         ? 'https://api.sahelimmo.info/auth/login/email/app?token=' + token
         : 'https://api.sahelimmo.info/auth/login/email/verify?token=' + token
-      var msg = {
-        to: user.email,
-        from: process.env.EMAIL,
-        subject: 'Connectez-vous sur Sahel Immo',
-        text:
-          'Salut! Cliquez le lien ci-dessous pour vous connecter sur Sahel Immo.\r\n\r\n' +
-          link,
-        html:
-          '<h3>Salut!</h3><p> Cliquez le lien ci-dessous pour vous connecter sur Sahel Immo.</p><p><a href="' +
-          link +
-          '">Sign in</a></p>',
-      }
-      return sendgrid.send(msg)
+
+
+
+        sendSmtpEmail.subject = 'Connectez-vous sur Sahel Immo!'
+       sendSmtpEmail.htmlContent =
+       '<h3>Salut!</h3><p> Cliquez le lien ci-dessous pour vous connecter sur Sahel Immo.</p><p><a href="' +
+       link +
+       '">Connectez-vous</a></p>',
+       sendSmtpEmail.sender = {
+         name: 'Sahel Immo',
+         email: process.env.SENDER_EMAIL,
+       }
+       sendSmtpEmail.to = [{ email: user.email }]
+       sendSmtpEmail.replyTo = {
+         email: process.env.SENDER_EMAIL,
+         name: 'Solitdio',
+       }
+
+       apiInstance.sendTransacEmail(sendSmtpEmail).then(
+         function (data) {
+           console.log(
+             'API called successfully. Returned data: ' + JSON.stringify(data)
+           )
+         },
+         function (error) {
+           console.error(error)
+         }
+       )
+     
     },
     async function verify(user) {
       try {
