@@ -9,19 +9,20 @@ import {
   FaX,
   FaLocationDot,
   FaPerson,
+  FaUser,
 } from "react-icons/fa6";
 export default function ListingCard2({ listing, user }) {
   const fetcher = useFetcher();
   return (
-    <div className="flex bg-white w-96 shadow-md m-2 flex-col">
-      <div className="flex relative">
+    <div className="flex bg-white max-w-96 shadow-md m-2 flex-col">
+      <div className="flex relative w-full">
         <Link to={`/listings/single/${listing._id}`}>
           <img
             src={
               url + "/" + listing.images[0] ||
               "https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.webp"
             }
-            className="max-h-96"
+            className="w-full"
             alt="listing"
           />{" "}
         </Link>
@@ -77,7 +78,7 @@ export default function ListingCard2({ listing, user }) {
           </div>
         </div>
       </div>
-      <div className="flex flex-col">
+      <div className="flex flex-col p-5">
         <h2 className="card-title text-lg">{listing.title}</h2>
         <span className="flex my-2 flex-row">
           <FaLocationDot className="h-4 m-1" />
@@ -86,9 +87,9 @@ export default function ListingCard2({ listing, user }) {
         </span>
         <span className="uppercase"> {listing.adType} </span>
         <hr className="w-full my-2"/>
-        <div className="flex justify-between">
+        <div className="flex justify-between items-center">
         <span className="flex my-2 flex-row">
-            <FaPerson/> {listing.owner.name}
+            <FaUser/> {listing.owner.name}
         </span>
         <span>{listing.updatedAt.split('T')[0]}</span>
         </div>
