@@ -8,7 +8,7 @@ import {
   FaWhatsapp,
   FaX,
   FaLocationDot,
-  FaPerson,
+  
   FaUser,
 } from "react-icons/fa6";
 export default function ListingCard2({ listing, user }) {
@@ -26,7 +26,7 @@ export default function ListingCard2({ listing, user }) {
             alt="listing"
           />{" "}
         </Link>
-        <div className="flex justify-between absolute bottom-0 backdrop-blur-md text-white p-1">
+        <div className="flex w-full justify-between absolute bottom-0 backdrop-blur-md text-white p-1">
           <h2 className="card-title text-lg">{listing.price} Franc CFA</h2>
           <div className="flex">
             {user && (user.isAdmin || user.email === listing.owner.email) ? (
@@ -36,7 +36,7 @@ export default function ListingCard2({ listing, user }) {
                   method="post"
                   action={`/listings/delete/${listing._id}`}
                 >
-                  <button className="btn bg-red-500">
+                  <button className="btn btn-xs bg-red-500">
                     {" "}
                     {fetcher.state === "idle" ? (
                       <FaX  />
@@ -46,7 +46,7 @@ export default function ListingCard2({ listing, user }) {
                   </button>
                 </fetcher.Form>
                 <Link
-                  className="btn btn-warning"
+                  className="btn btn-xs btn-warning"
                   to={`/admin/listing/edit/${listing._id}`}
                 >
                   <FaPencil  />
@@ -59,13 +59,13 @@ export default function ListingCard2({ listing, user }) {
               <>
                 <a
                   href={`https://wa.me/${listing.owner.phone || 22300000000}`}
-                  className="btn "
+                  className="btn btn-xs"
                 >
                   <FaWhatsapp  />
                 </a>
                 <a
                   href={`tel:${listing.owner.phone || 22300000000}`}
-                  className="btn "
+                  className="btn btn-xs"
                 >
                   <FaPhone />
                 </a>
