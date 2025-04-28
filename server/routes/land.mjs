@@ -25,12 +25,17 @@ const router = Router()
 
 // Check if user exists
 const checkUser = (req, res, next) => {
-    if (!req.user) return res.send({ error: "Vous n'etes pas connecte!" })
-    next()
+    if (!req.user) {
+        if(passport.authenticate('jwt',{session:false})){
+          return next()
+        }
+        return res.send({ error: 'Not logged in!' })
+      }
+      next()
 }
 
 // create a land here
-router.post('/',  passport.authenticate('jwt',{session:false}),checkUser,upload.array('images', 20), async (req, res) => {
+router.post('/', checkUser,upload.array('images', 20), async (req, res) => {
     const location = req.body.location.split(',')
   const data = req.body
   data.location = {}
@@ -57,7 +62,7 @@ router.post('/',  passport.authenticate('jwt',{session:false}),checkUser,upload.
 })
 
 // Edit land with images
-router.put("/:id",  passport.authenticate('jwt',{session:false}),checkUser, upload.array('images', 20), async (req, res) => {
+router.put("/:id",checkUser, upload.array('images', 20), async (req, res) => {
     const { id } = req.params
     //Setting the new Land
    const location = req.body.location.split(',')
@@ -103,7 +108,7 @@ router.put("/:id",  passport.authenticate('jwt',{session:false}),checkUser, uplo
 router.use(express.json())
 // update land without the images
 
-router.patch("/:id",  passport.authenticate('jwt',{session:false}),checkUser, async (req, res) => {
+router.patch("/:id",checkUser, async (req, res) => {
   const { id } = req.params
     //Setting the new Land
     const location = req.body.location.split(",") 

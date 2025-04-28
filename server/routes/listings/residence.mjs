@@ -78,8 +78,13 @@ const reArrangeListing = (req) => {
 }
 
 const checkUser = (req,res,next) => {
-  if (!req.user) return res.send({ error: 'Not logged in!' })
-  next()
+  if (!req.user) {
+      if(passport.authenticate('jwt',{session:false})){
+        return next()
+      }
+      return res.send({ error: 'Not logged in!' })
+    }
+    next()
 }
 
 // Initializing multer diskStorage
@@ -97,7 +102,7 @@ const upload = multer({ storage })
 
 const router = Router()
 
-router.post('/', upload.array('images', 20),  passport.authenticate('jwt',{session:false}),checkUser,async (req, res) => {
+router.post('/', upload.array('images', 20),checkUser,async (req, res) => {
  
   const data = reArrangeListing(req)
 
@@ -112,7 +117,7 @@ router.post('/', upload.array('images', 20),  passport.authenticate('jwt',{sessi
 
 
 
-router.put('/:id',  passport.authenticate('jwt',{session:false}),checkUser, (req, res, next) => {
+router.put('/:id',checkUser, (req, res, next) => {
   console.log("before", req.body)
   next()
 },upload.array('images', 20),(req, res, next) => {
@@ -144,7 +149,7 @@ router.put('/:id',  passport.authenticate('jwt',{session:false}),checkUser, (req
 
 router.use(express.json())
 
-router.patch("/:id",  passport.authenticate('jwt',{session:false}),checkUser, async (req, res) => {
+router.patch("/:id",checkUser, async (req, res) => {
   console.log('Inside patch residence')
   const { id } = req.params
  

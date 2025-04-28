@@ -74,7 +74,12 @@ const reArrangeListing = (req) => {
 }
 
 const checkUser = (req, res, next) => {
-  if (!req.user) return res.send({ error: 'Not logged in!' })
+  if (!req.user) {
+    if(passport.authenticate('jwt',{session:false})){
+      return next()
+    }
+    return res.send({ error: 'Not logged in!' })
+  }
   next()
 }
 
@@ -93,7 +98,7 @@ const upload = multer({ storage })
 
 const router = Router()
 
-router.post('/', upload.array('images', 20),  passport.authenticate('jwt',{session:false}),checkUser, async (req, res) => {
+router.post('/', upload.array('images', 20),checkUser, async (req, res) => {
   const data = reArrangeListing(req)
 
   try {
@@ -106,7 +111,7 @@ router.post('/', upload.array('images', 20),  passport.authenticate('jwt',{sessi
 })
 
 router.put(
-  '/:id', passport.authenticate('jwt',{session:false}),
+  '/:id',
   checkUser,
   (req, res, next) => {
     console.log('before', req.body)
@@ -141,7 +146,7 @@ router.put(
 
 router.use(express.json())
 
-router.patch('/:id',  passport.authenticate('jwt',{session:false}),checkUser, async (req, res) => {
+router.patch('/:id', checkUser, async (req, res) => {
   console.log('Inside patch Commercial')
   const { id } = req.params
 

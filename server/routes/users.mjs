@@ -29,13 +29,16 @@ const storage = multer.diskStorage({
 })
 const upload = multer({ storage })
 const checkIfConnected = (req, res, next) => {
-  if (!req.user) return res.send({ error: "Vous n'etes pas autorise!" })
-  
-  next()
+  if (!req.user) {
+      if(passport.authenticate('jwt',{session:false})){
+        return next()
+      }
+      return res.send({ error: 'Not logged in!' })
+    }
+    next()
 }
 const checkIfAdmin = (req, res, next) => {
   if (!req.user || !req.user.isAdmin) return res.send({ error: "Vous n'etes pas autorise!" })
-
   next()
 }
 const router = Router()
@@ -66,7 +69,7 @@ router.put('/:id', upload.single('picture'), async (req, res) => {
   }
 })
 //Verification submit
-router.patch("/verifySubmit/:id", passport.authenticate('jwt',{session:false}),checkIfConnected,upload.array("documents", 5),async (req, res) => {
+router.patch("/verifySubmit/:id", checkIfConnected,upload.array("documents", 5),async (req, res) => {
   const { id } = req.params
   const {userType} = req.body
   // Get the user to be updated
@@ -165,7 +168,7 @@ router.get('/:id', async (req, res) => {
 
 router.patch(
   '/verifyResult/:id',
-  passport.authenticate('jwt', { session: false }),
+  checkIfConnected,
   checkIfAdmin,
   async (req, res) => {
     const { id } = req.params
