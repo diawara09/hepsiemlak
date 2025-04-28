@@ -1,22 +1,20 @@
 import passport from 'passport'
 import MagicLink from 'passport-magic-link'
-
 import Users from '../models/users.mjs'
+import mongoose from 'mongoose'
 import {} from 'dotenv/config'
-
+import { SendSmtpEmail, TransactionalEmailsApi, 
+  TransactionalEmailsApiApiKeys } from '@getbrevo/brevo';
+  
+  const defaultClient = new TransactionalEmailsApi();
+  defaultClient.setApiKey(
+    TransactionalEmailsApiApiKeys.apiKey,
+    process.env.BREVO_API_KEY ?? ''
+  );
 const MagicLinkStrategy = MagicLink.Strategy
 
-// set the email parameters up
-let defaultClient = brevo.ApiClient.instance
 
-let apiKey = defaultClient.authentications['api-key']
-
-let apiInstance = new brevo.TransactionalEmailsApi()
-
-apiKey.apiKey = process.env.BREVO_API_KEY
-
-let sendSmtpEmail = new brevo.SendSmtpEmail()
-
+let sendSmtpEmail = new SendSmtpEmail()
 
 
 passport.use(
@@ -50,7 +48,7 @@ passport.use(
          name: 'Solitdio',
        }
 
-       apiInstance.sendTransacEmail(sendSmtpEmail).then(
+       defaultClient.sendTransacEmail(sendSmtpEmail).then(
          function (data) {
            console.log(
              'API called successfully. Returned data: ' + JSON.stringify(data)
