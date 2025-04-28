@@ -13,7 +13,7 @@ import {
 export default function ListingCard2({ listing, user }) {
   const fetcher = useFetcher();
   return (
-    <div className="flex bg-white w-96  flex-col">
+    <div className="flex bg-white w-96 shadow-md m-2 flex-col">
       <div className="flex relative">
         <Link to={`/listings/single/${listing._id}`}>
           <img
@@ -25,7 +25,7 @@ export default function ListingCard2({ listing, user }) {
             alt="listing"
           />{" "}
         </Link>
-        <div className="flex justify-between absolute bottom-0 p-3">
+        <div className="flex justify-between absolute bottom-0 backdrop-blur-md text-white p-1">
           <h2 className="card-title text-lg">{listing.price} Franc CFA</h2>
           <div className="flex">
             {user && (user.isAdmin || user.email === listing.owner.email) ? (
@@ -38,7 +38,7 @@ export default function ListingCard2({ listing, user }) {
                   <button className="btn bg-red-500">
                     {" "}
                     {fetcher.state === "idle" ? (
-                      <FaX className="h-5 w-5" />
+                      <FaX  />
                     ) : (
                       <span className="loading loading-spinner loading-md"></span>
                     )}{" "}
@@ -48,7 +48,7 @@ export default function ListingCard2({ listing, user }) {
                   className="btn btn-warning"
                   to={`/admin/listing/edit/${listing._id}`}
                 >
-                  <FaPencil className="h-5 w-5" />
+                  <FaPencil  />
                 </Link>
               </>
             ) : (
@@ -58,20 +58,20 @@ export default function ListingCard2({ listing, user }) {
               <>
                 <a
                   href={`https://wa.me/${listing.owner.phone || 22300000000}`}
-                  className="btn btn-primary"
+                  className="btn "
                 >
-                  <FaWhatsapp className="h-5 w-5" />
+                  <FaWhatsapp  />
                 </a>
                 <a
                   href={`tel:${listing.owner.phone || 22300000000}`}
-                  className="btn btn-primary"
+                  className="btn "
                 >
-                  <FaPhone className="h-5 w-5" />
+                  <FaPhone />
                 </a>
               </>
             ) : (
               <a href={`https://wa.me/22300000000`} className="btn">
-                <FaWhatsapp className="h-5 w-5" />
+                <FaWhatsapp  />
               </a>
             )}
           </div>
@@ -82,8 +82,7 @@ export default function ListingCard2({ listing, user }) {
         <span className="flex my-2 flex-row">
           <FaLocationDot className="h-4 m-1" />
           {listing.location.country}, {listing.location.city},
-          {listing.location.district},{listing.location.street},
-          {listing.location.door}; [listing.area.gross] m²
+          {listing.location.district}; {listing.area.gross} m²
         </span>
         <span className="uppercase"> {listing.adType} </span>
         <hr className="w-full my-2"/>

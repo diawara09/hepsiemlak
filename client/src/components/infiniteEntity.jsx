@@ -68,7 +68,7 @@ export default function InfiniteEntity({
             </p>
           }
         >
-          <div className="flex flex-col lg:flex-row items-center w-full justify-center lg:justify-start lg:max-w-3/4">
+          <div className="flex flex-col flex-wrap lg:flex-row items-center w-full justify-center lg:justify-start lg:max-w-3/4">
             {items.map((item) => (
               <UnitEntity listing={item} user={user} key={item._id} />
             ))}
