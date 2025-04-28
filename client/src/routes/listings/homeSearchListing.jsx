@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react"
 import { useSearchParams } from 'react-router-dom'
 import { url } from '../../utils/serverUrl'
-import ListingCard from '../../components/listings/listingCard'
+//import ListingCard from '../../components/listings/listingCard'
 //import { userContext } from '../../utils/contexts'
 import InfiniteEntity from '../../components/infiniteEntity'
+import ListingCard2 from "../../components/listings/listingCard2"
 
 //import toast, {Toaster} from 'react-hot-toast'
 //import listing from "../../../../server/models/listings/listing.mjs"
@@ -29,7 +30,7 @@ export default function HomeSearchListing() {
     <div className="w-full">
       <InfiniteEntity
         loaderRoute={loaderRoute}
-        UnitEntity={ListingCard}
+        UnitEntity={ListingCard2}
         fetchMoreURL={
           url + `/listings/homeSearch?type=${type}&adType=${adType}&q=${q}&country=${country}`
         }
