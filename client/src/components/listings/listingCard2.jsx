@@ -14,7 +14,7 @@ import {
 export default function ListingCard2({ listing, user }) {
   const fetcher = useFetcher();
   return (
-    <div className="flex bg-white max-w-96 shadow-md m-2 flex-col">
+    <div className="flex bg-white max-w-96 shadow-md m-2 flex-col intersect:motion-preset-slide-up motion-delay-[2s]">
       <div className="flex relative w-full">
         <Link to={`/listings/single/${listing._id}`}>
           <img
@@ -89,7 +89,7 @@ export default function ListingCard2({ listing, user }) {
         <hr className="w-full my-2"/>
         <div className="flex justify-between items-center">
         <span className="flex my-2 flex-row">
-            <FaUser/> {listing.owner.name}
+            <FaUser className="mx-2"/> {listing.owner.name}
         </span>
         <span>{listing.updatedAt.split('T')[0]}</span>
         </div>
